@@ -1,0 +1,10 @@
+
+{
+  "name": "Douaa Gourmandises",
+  "short_name": "Douaa",
+  "description": "مطعم Douaa Gourmandises",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ff4f7b"
+}
