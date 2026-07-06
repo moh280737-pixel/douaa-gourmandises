@@ -1,9 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<title>Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douaa Gourmandises</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#111;
+color:white;
+margin:0;
+padding:15px;
+}
+
+.welcome{
+text-align:center;
+margin-bottom:20px;
+}
+
+.welcome h2{
+color:#ff4f7b;
+}
+
+.header{
+background:#1b1b1b;
+padding:20px;
+border-radius:20px;
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo{
+width:220px;
+max-width:100%;
+border-radius:20px;
+}
+
+.dot{
+width:12px;
+height:12px;
+display:inline-block;
+border-radius:50%;
+background:lime;
+margin-left:5px;
+}
+
+.product{
+background:#1d1d1d;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+text-align:center;
+}
+
+.price{
+font-size:30px;
+color:gold;
+}
+
+.quantity{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+margin:15px 0;
+}
+
+.quantity button{
+width:45px;
+height:45px;
+font-size:24px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.qty{
+font-size:24px;
+}
+
+.order-btn{
+width:100%;
+padding:15px;
+background:#ff4f7b;
+color:white;
+border:none;
+border-radius:15px;
+font-size:20px;
+cursor:pointer;
+}
+
+.cart{
+background:#1b1b1b;
+padding:20px;
+border-radius:20px;
+text-align:center;
+margin-top:20px;
+}
+
+.send-btn{
+width:100%;
+padding:15px;
+background:#25D366;
+color:white;
+border:none;
+border-radius:15px;
+font-size:20px;
+cursor:pointer;
+}
+</style>
 </head>
+
 <body>
-<h1>Hello</h1>
+
+<div class="welcome">
+<h2>مرحباً بك في مطعم</h2>
+<h1>Douaa Gourmandises</h1>
+<p>أشهى البيتزا والبرغر</p>
+</div>
+
+<div class="header">
+
+<img src="logo.jpg" class="logo">
+
+<div style="margin-top:10px;">
+<span class="dot" id="dot"></span>
+<span id="statusText">مفتوح الآن</span>
+</div>
+
+<p>ساعات العمل: 08:00 - 22:00</p>
+
+</div>
+
+<div class="product">
+<h2>MINI PIZZA</h2>
+<div class="price">80 DA</div>
+
+<div class="quantity">
+<button onclick="minus(this)">-</button>
+<span class="qty">1</span>
+<button onclick="plus(this)">+</button>
+</div>
+
+<button class="order-btn"
+onclick="addToCart('MINI PIZZA',80,this)">
+إضافة للسلة
+</button>
+</div>
+
+<div class="product">
+<h2>PIZZA NORMAL</h2>
+<div class="price">350 DA</div>
+
+<div class="quantity">
+<button onclick="minus(this)">-</button>
+<span class="qty">1</span>
+<button onclick="plus(this)">+</button>
+</div>
+
+<button class="order-btn"
+onclick="addToCart('PIZZA NORMAL',350,this)">
+إضافة للسلة
+</button>
+</div>
+
+<div class="product">
+<h2>MINI BURGER</h2>
+<div class="price">100 DA</div>
+
+<div class="quantity">
+<button onclick="minus(this)">-</button>
+<span class="qty">1</span>
+<button onclick="plus(this)">+</button>
+</div>
+
+<button class="order-btn"
+onclick="addToCart('MINI BURGER',100,this)">
+إضافة للسلة
+</button>
+</div>
+
+<div class="product">
+<h2>BURGER NORMAL</h2>
+<div class="price">400 DA</div>
+
+<div class="quantity">
+<button onclick="minus(this)">-</button>
+<span class="qty">1</span>
+<button onclick="plus(this)">+</button>
+</div>
+
+<button class="order-btn"
+onclick="addToCart('BURGER NORMAL',400,this)">
+إضافة للسلة
+</button>
+</div>
+
+<div class="cart">
+<h2>المجموع: <span id="total">0</span> DA</h2>
+
+<button class="send-btn" onclick="sendOrder()">
+إرسال الطلب عبر واتساب
+</button>
+</div>
+
+<script>
+
+let cart=[];
+
+function plus(btn){
+let q=btn.parentElement.querySelector('.qty');
+q.innerText=parseInt(q.innerText)+1;
+}
+
+function minus(btn){
+let q=btn.parentElement.querySelector('.qty');
+let n=parseInt(q.innerText);
+if(n>1) q.innerText=n-1;
+}
+
+function addToCart(name,price,btn){
+
+let qty=parseInt(
+btn.parentElement.querySelector('.qty').innerText
+);
+
+cart.push({
+name:name,
+price:price,
+qty:qty
+});
+
+updateTotal();
+
+alert("تمت إضافة المنتج للسلة");
+}
+
+function updateTotal(){
+
+let total=0;
+
+for(let item of cart){
+total += item.price * item.qty;
+}
+
+document.getElementById("total").innerText=total;
+}
+
+function sendOrder(){
+
+if(cart.length===0){
+alert("السلة فارغة");
+return;
+}
+
+let text="طلب جديد%0A%0A";
+let total=0;
+
+for(let item of cart){
+
+text += item.name +
+" × " + item.qty +
+"%0A";
+
+total += item.price * item.qty;
+}
+
+text += "%0Aالمجموع: " + total + " DA";
+
+window.open(
+"https://wa.me/213794535203?text="+text,
+"_blank"
+);
+
+}
+
+function updateStatus(){
+
+let hour=new Date().getHours();
+
+if(hour>=8 && hour<22){
+document.getElementById("dot").style.background="lime";
+document.getElementById("statusText").innerText="مفتوح الآن";
+}else{
+document.getElementById("dot").style.background="red";
+document.getElementById("statusText").innerText="مغلق الآن";
+}
+
+}
+
+updateStatus();
+setInterval(updateStatus,60000);
+
+</script>
+
 </body>
 </html>
