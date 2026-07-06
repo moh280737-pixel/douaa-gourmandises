@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Douaa Gourmandises</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🍔 Douaa Gourmandises 🍕</h1>
+  <p>أهلاً بكم في مطعمنا</p>
+</header>
+
+<main class="products">
+
+  <div class="card">
+    <img src="images/burger-big.jpg" alt="برغر كبير">
+    <h2>برغر كبير</h2>
+    <p>300 دج</p>
+    <button onclick="addToCart('برغر كبير',300)">أضف إلى السلة</button>
+  </div>
+
+  <div class="card">
+    <img src="images/burger-small.jpg" alt="برغر صغير">
+    <h2>برغر صغير</h2>
+    <p>100 دج</p>
+    <button onclick="addToCart('برغر صغير',100)">أضف إلى السلة</button>
+  </div>
+
+  <div class="card">
+    <img src="images/pizza-big.jpg" alt="بيتزا عادية">
+    <h2>بيتزا عادية</h2>
+    <p>350 دج</p>
+    <button onclick="addToCart('بيتزا عادية',350)">أضف إلى السلة</button>
+  </div>
+
+  <div class="card">
+    <img src="images/pizza-small.jpg" alt="بيتزا صغيرة">
+    <h2>بيتزا صغيرة</h2>
+    <p>80 دج</p>
+    <button onclick="addToCart('بيتزا صغيرة',80)">أضف إلى السلة</button>
+  </div>
+
+</main>
+
+<section class="cart">
+  <h2>🛒 سلة المشتريات</h2>
+
+  <ul id="cartList"></ul>
+
+  <h3>المجموع: <span id="total">0</span> دج</h3>
+
+  <input type="text" placeholder="رقم الهاتف">
+
+  <button class="send">إرسال الطلب</button>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
